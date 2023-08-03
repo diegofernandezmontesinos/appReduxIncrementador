@@ -7,7 +7,26 @@ export const origenSlice = createSlice({
     reducers:{
         guardarMiNombre: (state, action)=> {
             state.miNombre = action.payload;
-        }
+        }, 
+        modificarUnValor: (state, action) => {
+            const {indice, nuevoNombre, nuevoInicio} = action.payload;
+            state.bibliotecas[indice].nombre = nuevoNombre;
+            state.bibliotecas[indice].inicio = nuevoInicio;
+        },
+        agregarUnValor: (state, action)=> {
+            const { nuevoNombre, nuevoInicio} = action.payload;
+            state.bibliotecas = [...state.bibliotecas, 
+                {nombre:nuevoNombre, inicio: nuevoInicio} ]
+        
+        }, 
+        eliminarUnValor: (state, action)=> {
+            
+            state.bibliotecas = state.bibliotecas.filter(valor => valor.nombre != action.payload)
+        },
+
+
+
+
     }
 })
 
@@ -23,3 +42,6 @@ export const otroSlice = createSlice({
 
 export const { guardarMiNombre } = origenSlice.actions;
 export const { incrementarPuntuacion } = otroSlice.actions;
+export const { modificarUnValor } = otroSlice.actions;
+export const { agregarUnValor } = otroSlice.actions;
+export const { eliminarUnValor } = otroSlice.actions;
